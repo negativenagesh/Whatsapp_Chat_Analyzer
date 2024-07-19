@@ -8,6 +8,6 @@ def fetch_stats(selected_user,df):
     for message in df['messages']: 
         words.extend(message.split())
 
-    numberofmediamsgs=df[df['messages']=='<Media omitted>/n'].shape[0]
+    numberofmediamsgs=df[df['messages']=='<Media omitted>\n'].shape[0]
 
     return num_messages,len(words),numberofmediamsgs
