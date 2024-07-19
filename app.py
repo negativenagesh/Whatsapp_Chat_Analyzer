@@ -21,4 +21,8 @@ if uploaded_file is not None:
     st.sidebar.selectbox("Show analysis with respect to",user_list)
 
     if st.sidebar.button("Show analysis"):
-        pass
+        
+        col1,col2,col3,col4=st.columns(4)
+
+        with col1:
+            st.header("Total Messages")
