@@ -1,10 +1,17 @@
 import streamlit as st
 import preprocessor,helper
+import matplotlib.pyplot as plt
 
 st.sidebar.title("Whatsapp Chat Analyzer")
 
+def get_filename(file):
+  return file.name.rsplit(".", 1)[0]
+
+
 uploaded_file=st.sidebar.file_uploader("Upload a file")
 if uploaded_file is not None:
+    filename = get_filename(uploaded_file)
+    st.write(f"## {filename}")
     bytes_data=uploaded_file.getvalue()
     data=bytes_data.decode("utf-8")
     df=preprocessor.preprocess(data)
@@ -43,4 +50,18 @@ if uploaded_file is not None:
         
         if selected_user == "Overall":
             st.title('Most busy users')
+            mostbusyusers=helper.most_busy_users(df)
+            fig, ax =plt.subplots()
+
             col1, col2 = st.columns(2)
+
+            with col1:
+                bars=ax.bar(mostbusyusers.index,mostbusyusers.values)
+
+                plt.xticks(rotation='vertical')
+
+                #adding annotations for each bar
+                ax.bar_label(bars, padding=3)
+
+                plt.tight_layout()
+                st.pyplot(fig)
