@@ -21,7 +21,7 @@ if uploaded_file is not None:
     selected_user=st.sidebar.selectbox("Show analysis with respect to",user_list)
 
     if st.sidebar.button("Show analysis"):
-        num_messages,words,numberofmediamsgs=helper.fetch_stats(selected_user,df)
+        num_messages,words,numberofmediamsgs,num_links=helper.fetch_stats(selected_user,df)
         
         col1,col2,col3,col4=st.columns(4)
 
@@ -36,3 +36,7 @@ if uploaded_file is not None:
         with col3:
             st.header("Total Media Shared")
             st.title(numberofmediamsgs)
+
+        with col4:
+            st.header("Links shared in this group")
+            st.title(num_links)
