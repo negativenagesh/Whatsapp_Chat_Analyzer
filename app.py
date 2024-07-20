@@ -40,3 +40,7 @@ if uploaded_file is not None:
         with col4:
             st.header("Links shared in this group")
             st.title(num_links)
+        
+        if selected_user == "Overall":
+            st.title('Most busy users')
+            col1, col2 = st.columns(2)
