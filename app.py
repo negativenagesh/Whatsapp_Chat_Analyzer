@@ -87,3 +87,16 @@ if uploaded_file is not None:
         ax.bar(most_common_df[0],most_common_df[1])
         plt.xticks(rotation='vertical')
         st.pyplot(fig)
+
+        emojidf=helper.emoji_helper(selected_user,df)
+        st.title("Emoji Analysis")
+
+        col1,col2=st.columns(2)
+
+        with col1:
+            st.dataframe(emojidf)
+
+        with col2:
+            fig,ax=plt.subplots()
+            ax.pie(emojidf[1].head(),labels=emojidf[0].head(),autopct="0.2f")
+            st.pyplot(fig)
