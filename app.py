@@ -5,8 +5,8 @@ import matplotlib.pyplot as plt
 st.sidebar.title("Whatsapp Chat Analyzer")
 
 def get_filename(file):
-  return file.name.rsplit(".", 1)[0]
-
+    name = file.name.rsplit(".", 1)[0]  # Split at the last dot and take the first part
+    return name
 
 uploaded_file=st.sidebar.file_uploader("Upload a file")
 if uploaded_file is not None:
@@ -21,7 +21,9 @@ if uploaded_file is not None:
 
     user_list=df['user'].unique().tolist()
 
-    user_list.remove("group_notification")
+    if "group_notification" in user_list:
+        user_list.remove("group_notification")
+
     user_list.sort()
     user_list.insert(0,"Overall")
 
