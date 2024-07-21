@@ -1,6 +1,6 @@
 from urlextract import URLExtract
 extract=URLExtract()
-from wordcloud import wordcloud
+from wordcloud import WordCloud
 
 def fetch_stats(selected_user,df):
 
@@ -33,6 +33,6 @@ def create_wordcloud(selected_user,df):
     if selected_user!="Overall":
         df=df[df['user']==selected_user]
     
-    wc=wordcloud(width=500,min_font_size=10)
+    wc=WordCloud(width=500,min_font_size=10)
     df_wc=wc.generate(df['messages'].str.cat(sep=" "))
     return df_wc
