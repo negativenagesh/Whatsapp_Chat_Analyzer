@@ -1,7 +1,9 @@
 from urlextract import URLExtract
 extract=URLExtract()
+import nltk
 from wordcloud import WordCloud
 from nltk.corpus import stopwords
+stop_words = set(stopwords.words('english'))
 import pandas as pd
 from collections import Counter
 
@@ -54,7 +56,7 @@ def most_common_words(selected_user,df):
 
     for message in temp['messages']:
         for word in message.lower().split():
-            if word not in stopwords:
+            if word not in stop_words:
                 words.append(word)
 
     most_common_df=pd.DataFrame(Counter(words).most_common(20))
