@@ -1,6 +1,8 @@
 import streamlit as st
 import preprocessor,helper
 import matplotlib.pyplot as plt
+import nltk
+from nltk.corpus import stopwords
 
 st.sidebar.title("Whatsapp Chat Analyzer")
 
@@ -71,12 +73,12 @@ if uploaded_file is not None:
             with col2:
                 st.dataframe(new_df)
             
-        st.title('Most repeated words in this chat')
+        st.title('Wordcloud for most repeated words in this chat')
         df_wc=helper.create_wordcloud(selected_user,df)
         fig,ax=plt.subplots()
         ax.imshow(df_wc)
         st.pyplot(fig)
 
+        st.title('Most repeated words ranking')
         most_common_df=helper.most_common_words(selected_user,df)
-
         st.dataframe(most_common_df)
