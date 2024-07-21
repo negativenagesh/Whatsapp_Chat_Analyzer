@@ -50,7 +50,7 @@ if uploaded_file is not None:
         
         if selected_user == "Overall":
             st.title('Most busy users')
-            mostbusyusers=helper.most_busy_users(df)
+            mostbusyusers,new_df=helper.most_busy_users(df)
             fig, ax =plt.subplots()
 
             col1, col2 = st.columns(2)
@@ -65,3 +65,6 @@ if uploaded_file is not None:
 
                 plt.tight_layout()
                 st.pyplot(fig)
+
+            with col2:
+                st.dataframe(new_df)
