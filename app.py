@@ -18,9 +18,6 @@ if uploaded_file is not None:
     data=bytes_data.decode("utf-8")
     df=preprocessor.preprocess(data)
 
-
-    st.dataframe(df)
-
     user_list=df['user'].unique().tolist()
 
     if "group_notification" in user_list:
@@ -34,6 +31,7 @@ if uploaded_file is not None:
     if st.sidebar.button("Show analysis"):
         num_messages,words,numberofmediamsgs,num_links=helper.fetch_stats(selected_user,df)
         
+        st.title("Top Statistics")
         col1,col2,col3,col4=st.columns(4)
 
         with col1:
@@ -51,6 +49,16 @@ if uploaded_file is not None:
         with col4:
             st.header("Links shared in this group")
             st.title(num_links)
+
+        st.title('Record of number of messages monthwise')
+
+        timeline=helper.monthly_timeline(selected_user,df)
+        fig,ax=plt.subplots()
+        fig, ax = plt.subplots(figsize=(20, 6))
+
+        ax.plot(timeline['time'],timeline['messages'])
+        plt.xticks(rotation="vertical")
+        st.pyplot(fig)
         
         if selected_user == "Overall":
             st.title('Most busy users')
