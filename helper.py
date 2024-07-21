@@ -40,8 +40,19 @@ def create_wordcloud(selected_user,df):
     if selected_user!="Overall":
         df=df[df['user']==selected_user]
     
+    temp=df[df['user']!='group_notification']
+    temp=temp[temp['messages']!='<Media omitted>\n']
+
+    def remove_stop_words(message):
+        y=[]
+        for word in message.lower().split():
+            if word not in stop_words:
+                y.append(word)
+        return " ".join(y)
+    
     wc=WordCloud(width=500,min_font_size=10)
-    df_wc=wc.generate(df['messages'].str.cat(sep=" "))
+    temp['messages']=temp['messages'].apply(remove_stop_words)
+    df_wc=wc.generate(temp['messages'].str.cat(sep=" "))
     return df_wc
 
 def most_common_words(selected_user,df):
