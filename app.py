@@ -79,7 +79,7 @@ if uploaded_file is not None:
         ax.imshow(df_wc)
         st.pyplot(fig)
 
-        st.title('Most repeated words ranking')
+        st.title('Most common words ranking')
         most_common_df=helper.most_common_words(selected_user,df)
 
         fig,ax=plt.subplots()
