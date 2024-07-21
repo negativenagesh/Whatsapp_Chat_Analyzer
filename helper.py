@@ -6,6 +6,7 @@ from nltk.corpus import stopwords
 stop_words = set(stopwords.words('english'))
 import pandas as pd
 from collections import Counter
+import emoji
 
 
 
@@ -72,3 +73,17 @@ def most_common_words(selected_user,df):
 
     most_common_df=pd.DataFrame(Counter(words).most_common(20))
     return most_common_df
+
+
+def emoji_helper(selected_user,df):
+    
+    if selected_user!="Overall":
+        df=df[df['user']==selected_user]
+
+    emojis=[]
+    for message in df['messages']:
+        emojis.extend([c for c in message if c in emoji.EMOJI_DATA])
+    
+    emojidf=pd.DataFrame(Counter(emojis).most_common(len(Counter(emojis))))
+
+    return emojidf
