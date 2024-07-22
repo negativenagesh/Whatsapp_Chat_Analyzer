@@ -37,6 +37,7 @@ def preprocess(data):
     df['weekday'] = df['message_date'].dt.day_name()
     df['date'] = df['message_date'].dt.day
     df['only_date']=df['message_date'].dt.date
+    df['day_name']=df['message_date'].dt.day_name()
     df['day_of_month']=df['message_date'].dt.day
     df['hour']=df['message_date'].dt.hour
     df['minute']=df['message_date'].dt.minute
