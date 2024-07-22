@@ -3,6 +3,7 @@ import preprocessor,helper
 import matplotlib.pyplot as plt
 import nltk
 from nltk.corpus import stopwords
+import seaborn as sns
 
 st.sidebar.title("Whatsapp Chat Analyzer")
 
@@ -89,8 +90,11 @@ if uploaded_file is not None:
             plt.xticks(rotation='vertical')
             st.pyplot(fig)
 
-
-
+        st.title('Weekly activity Map')
+        user_heatmap=helper.activity_heatmap(selected_user,df)
+        fig,ax=plt.subplots()
+        ax=sns.heatmap(user_heatmap)
+        st.pyplot(fig)
 
         if selected_user == "Overall":
             st.title('Most busy users')
