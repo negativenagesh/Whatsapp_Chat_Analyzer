@@ -106,5 +106,5 @@ if uploaded_file is not None:
 
         with col2:
             fig,ax=plt.subplots()
-            ax.pie(emojidf[1].head(),labels=emojidf[0].head(),autopct="0.2f")
+            ax.pie(emojidf['Count'].head(),labels=emojidf['Emoji'].head(),autopct="%0.2f")
             st.pyplot(fig)
