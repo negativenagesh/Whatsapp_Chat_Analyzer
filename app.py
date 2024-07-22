@@ -60,6 +60,16 @@ if uploaded_file is not None:
         plt.xticks(rotation="vertical")
         st.pyplot(fig)
         
+        st.title('Record of number of messages Daywise')
+
+        daily_timeline=helper.daily_timeline(selected_user,df)
+        fig,ax=plt.subplots()
+        fig, ax = plt.subplots(figsize=(20, 6))
+
+        ax.plot(daily_timeline['only_date'],daily_timeline['messages'],color='black')
+        plt.xticks(rotation="vertical")
+        st.pyplot(fig)
+
         if selected_user == "Overall":
             st.title('Most busy users')
             mostbusyusers,new_df=helper.most_busy_users(df)
