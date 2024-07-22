@@ -74,11 +74,21 @@ if uploaded_file is not None:
         col1,col2=st.columns(2)
 
         with col1:
-            st.header("Most busy day")
+            st.header("Most busy Day")
             busy_day=helper.week_activity_map(selected_user,df)
             fig,ax=plt.subplots()
             ax.bar(busy_day.index,busy_day.values)
+            plt.xticks(rotation='vertical')
             st.pyplot(fig)
+
+        with col2:
+            st.header("Most busy Month")
+            busy_month=helper.month_activity_map(selected_user,df)
+            fig,ax=plt.subplots()
+            ax.bar(busy_month.index,busy_month.values,color='orange')
+            plt.xticks(rotation='vertical')
+            st.pyplot(fig)
+
 
 
 
